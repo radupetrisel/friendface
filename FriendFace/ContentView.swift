@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = ContentViewModel()
+    
+    @State private var isShowingNetworkError = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach(viewModel.users) {
+                    Text($0.name)
+                }
+            }
+            .navigationTitle("FriendFace")
         }
-        .padding()
+        .alert("An error has occurred", isPresented: $isShowingNetworkError) {
+            Button("Ok") { }
+        } message: {
+            Text("Could not retrieve users.")
+        }
+        .task {
+            do {
+                try await viewModel.loadUsers()
+            } catch {
+                isShowingNetworkError = true
+            }
+        }
     }
 }
 
