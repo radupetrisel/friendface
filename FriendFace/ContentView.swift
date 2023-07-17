@@ -17,7 +17,7 @@ struct ContentView: View {
             List {
                 ForEach(viewModel.users) { user in
                     NavigationLink {
-                        UserDetailView(user: user)
+                        UserDetailView(contentViewModel: viewModel, user: user)
                     } label: {
                         VStack {
                             Text(user.name)

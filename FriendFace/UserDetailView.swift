@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UserDetailView: View {
+    @ObservedObject private var contentViewModel: ContentViewModel
+    
     let user: User
     
     var body: some View {
@@ -67,12 +69,25 @@ struct UserDetailView: View {
             
             Section("Friends") {
                 ForEach(user.friends) { friend in
-                    Text(friend.name)
+                    NavigationLink {
+                        if let friendUser = contentViewModel.getUser(byId: friend.id) {
+                            UserDetailView(contentViewModel: contentViewModel, user: friendUser)
+                        } else {
+                            Text(friend.name)
+                        }
+                    } label: {
+                        Text(friend.name)
+                    }
                 }
             }
         }
         .navigationTitle(user.name)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    init(contentViewModel: ContentViewModel, user: User) {
+        self.contentViewModel = contentViewModel
+        self.user = user
     }
     
     private func userDetailText(_ string: String) -> some View {
@@ -84,7 +99,7 @@ struct UserDetailView: View {
 struct UserDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UserDetailView(user: User.preview)
+            UserDetailView(contentViewModel: ContentViewModel(), user: User.preview)
         }
     }
 }

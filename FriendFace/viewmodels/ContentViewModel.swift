@@ -10,7 +10,11 @@ import SwiftUI
 final class ContentViewModel: ObservableObject {
     private static let urlString = "https://www.hackingwithswift.com/samples/friendface.json"
     
-    @Published var users: [User] = []
+    @Published private var usersById: [UUID: User] = [:]
+    
+    var users: [User] {
+        Array(usersById.values)
+    }
     
     func loadUsers() async throws {
         guard let url = URL(string: Self.urlString) else {
@@ -26,7 +30,13 @@ final class ContentViewModel: ObservableObject {
         let users = try jsonDecoder.decode([User].self, from: data)
         
         DispatchQueue.main.async { [unowned self] in
-            self.users = users
+            for user in users {
+                self.usersById[user.id] = user
+            }
         }
+    }
+    
+    func getUser(byId id: UUID) -> User? {
+        usersById[id]
     }
 }
