@@ -18,4 +18,23 @@ struct User: Identifiable, Codable {
     let about: String
     let registered: Date
     let tags: [String]
+    
+    var tagsInline: String {
+        "#\(tags.joined(separator: " #"))"
+    }
+    
+    static var preview: User {
+        User(
+            id: UUID(),
+            isActive: true,
+            name: "John Doe",
+            age: 28,
+            company: "Apple",
+            email: "john.doe@email.com",
+            address: "4, Swift Street, 784562",
+            about: "I like helping devs test their data",
+            registered: Date.now,
+            tags: ["Awesome", "Friendly", "LikesDrinking"]
+        )
+    }
 }

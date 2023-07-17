@@ -14,6 +14,7 @@
 		7C9FBA082A65AF9900398DE7 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 7C9FBA072A65AF9900398DE7 /* Readme.md */; };
 		7C9FBA0B2A65B0CA00398DE7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FBA0A2A65B0CA00398DE7 /* User.swift */; };
 		7C9FBA0E2A65B16F00398DE7 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FBA0D2A65B16F00398DE7 /* ContentViewModel.swift */; };
+		7C9FBA102A65BC7900398DE7 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9FBA0F2A65BC7900398DE7 /* UserDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		7C9FBA072A65AF9900398DE7 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		7C9FBA0A2A65B0CA00398DE7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7C9FBA0D2A65B16F00398DE7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		7C9FBA0F2A65BC7900398DE7 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				7C9FBA092A65B0AC00398DE7 /* models */,
 				7C9FB9F92A65AF8C00398DE7 /* FriendFaceApp.swift */,
 				7C9FB9FB2A65AF8C00398DE7 /* ContentView.swift */,
+				7C9FBA0F2A65BC7900398DE7 /* UserDetailView.swift */,
 				7C9FB9FD2A65AF8D00398DE7 /* Assets.xcassets */,
 				7C9FB9FF2A65AF8D00398DE7 /* Preview Content */,
 			);
@@ -166,6 +169,7 @@
 				7C9FBA0E2A65B16F00398DE7 /* ContentViewModel.swift in Sources */,
 				7C9FB9FC2A65AF8C00398DE7 /* ContentView.swift in Sources */,
 				7C9FB9FA2A65AF8C00398DE7 /* FriendFaceApp.swift in Sources */,
+				7C9FBA102A65BC7900398DE7 /* UserDetailView.swift in Sources */,
 				7C9FBA0B2A65B0CA00398DE7 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
