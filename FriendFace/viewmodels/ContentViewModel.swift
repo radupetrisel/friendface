@@ -23,7 +23,10 @@ final class ContentViewModel: ObservableObject {
         
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .iso8601
+        let users = try jsonDecoder.decode([User].self, from: data)
         
-        users = try jsonDecoder.decode([User].self, from: data)
+        DispatchQueue.main.async { [unowned self] in
+            self.users = users
+        }
     }
 }
