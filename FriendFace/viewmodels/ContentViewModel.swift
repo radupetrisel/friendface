@@ -17,6 +17,10 @@ final class ContentViewModel: ObservableObject {
     }
     
     func loadUsers() async throws {
+        guard usersById.isEmpty else {
+            return
+        }
+        
         guard let url = URL(string: Self.urlString) else {
             fatalError("Could not parse URL: \(Self.urlString)")
         }
