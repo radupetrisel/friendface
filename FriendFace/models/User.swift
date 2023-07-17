@@ -18,6 +18,7 @@ struct User: Identifiable, Codable {
     let about: String
     let registered: Date
     let tags: [String]
+    let friends: [Friend]
     
     var tagsInline: String {
         "#\(tags.joined(separator: " #"))"
@@ -34,7 +35,8 @@ struct User: Identifiable, Codable {
             address: "4, Swift Street, 784562",
             about: "I like helping devs test their data",
             registered: Date.now,
-            tags: ["Awesome", "Friendly", "LikesDrinking"]
+            tags: ["Awesome", "Friendly", "LikesDrinking"],
+            friends: [Friend(id: UUID(), name: "Jane Doe"), Friend(id: UUID(), name: "John Johnson")]
         )
     }
 }

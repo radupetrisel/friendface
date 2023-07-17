@@ -64,6 +64,12 @@ struct UserDetailView: View {
             Section("Tags") {
                 userDetailText(user.tagsInline)
             }
+            
+            Section("Friends") {
+                ForEach(user.friends) { friend in
+                    Text(friend.name)
+                }
+            }
         }
         .navigationTitle(user.name)
         .navigationBarTitleDisplayMode(.inline)
