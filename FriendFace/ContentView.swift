@@ -15,8 +15,21 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.users) {
-                    Text($0.name)
+                ForEach(viewModel.users) { user in
+                    NavigationLink {
+                        Text(user.address)
+                    } label: {
+                        VStack {
+                            Text(user.name)
+                                .font(.title3)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Text(user.email)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
                 }
             }
             .navigationTitle("FriendFace")
