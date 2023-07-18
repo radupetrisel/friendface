@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @StateObject private var viewModel = ContentViewModel()
     
     @State private var isShowingNetworkError = false
+    
+    @FetchRequest(sortDescriptors: []) private var users: FetchedResults<CachedUser>
     
     var body: some View {
         NavigationView {
@@ -41,7 +45,7 @@ struct ContentView: View {
         }
         .task {
             do {
-                try await viewModel.loadUsers()
+                try await viewModel.loadUsers(viewContext: viewContext, cachedUsers: Array(users))
             } catch {
                 isShowingNetworkError = true
             }
