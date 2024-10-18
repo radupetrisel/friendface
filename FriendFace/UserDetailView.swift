@@ -1,6 +1,9 @@
+import SwiftData
 import SwiftUI
 
 struct UserDetailView: View {
+    @Environment(\.modelContext) var modelContext
+
     let user: User
 
     var body: some View {
@@ -59,7 +62,19 @@ struct UserDetailView: View {
 
             Section("Friends") {
                 ForEach(user.friends) { friend in
-                    Text(friend.name)
+                    NavigationLink {
+                        let userId = friend.id
+                        let user = try? modelContext.fetch(User.fetchDescriptor())
+                            .first(where: { $0.id == userId })
+
+                        if let user {
+                            UserDetailView(user: user)
+                        } else {
+                            Text("Could not find user for given ID.")
+                        }
+                    } label: {
+                        Text(friend.name)
+                    }
                 }
             }
         }

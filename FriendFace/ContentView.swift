@@ -1,6 +1,8 @@
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
     @Environment(DataModel.self) var dataModel
 
     @State private var isShowingNetworkError = false
@@ -29,9 +31,9 @@ struct ContentView: View {
             } message: {
                 Text("Could not retrieve users.")
             }
-            .task {
+            .task { @MainActor in
                 do {
-                    try await dataModel.loadUsers()
+                    try await dataModel.loadUsers(into: modelContext)
                 } catch {
                     isShowingNetworkError.toggle()
                 }

@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 @main
@@ -8,6 +9,7 @@ struct FriendFaceApp: App {
         WindowGroup {
             ContentView()
                 .environment(dataModel)
+                .modelContainer(for: User.self)
         }
     }
 }
