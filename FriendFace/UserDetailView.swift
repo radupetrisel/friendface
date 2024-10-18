@@ -1,19 +1,10 @@
-//
-//  UserDetailView.swift
-//  FriendFace
-//
-//  Created by Radu Petrisel on 17.07.2023.
-//
-
 import SwiftUI
 
 struct UserDetailView: View {
-    @ObservedObject private var contentViewModel: ContentViewModel
-    
     let user: User
     
     var body: some View {
-        Form {
+        List {
             Section("Personal info") {
                 HStack {
                     Text("Age")
@@ -64,30 +55,21 @@ struct UserDetailView: View {
             }
             
             Section("Tags") {
-                userDetailText(user.tagsInline)
+                HStack {
+                    ForEach(user.tags, id: \.self) { tag in
+                        Text(tag)
+                    }
+                }
             }
             
             Section("Friends") {
                 ForEach(user.friends) { friend in
-                    NavigationLink {
-                        if let friendUser = contentViewModel.getUser(byId: friend.id) {
-                            UserDetailView(contentViewModel: contentViewModel, user: friendUser)
-                        } else {
-                            Text(friend.name)
-                        }
-                    } label: {
-                        Text(friend.name)
-                    }
+                    Text(friend.name)
                 }
             }
         }
         .navigationTitle(user.name)
         .navigationBarTitleDisplayMode(.inline)
-    }
-    
-    init(contentViewModel: ContentViewModel, user: User) {
-        self.contentViewModel = contentViewModel
-        self.user = user
     }
     
     private func userDetailText(_ string: String) -> some View {
@@ -96,10 +78,8 @@ struct UserDetailView: View {
     }
 }
 
-struct UserDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            UserDetailView(contentViewModel: ContentViewModel(), user: User.preview)
-        }
+#Preview {
+    NavigationStack {
+        UserDetailView(user: .preview)
     }
 }
